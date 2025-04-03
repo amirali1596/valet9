@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Use same styling as your signup page -->
+  <style>
+    /* Copy all your existing styles here */
+    .cancel-flow {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+    .cancellation-reason {
+      width: 100%;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="signup-form">
+      <h1>Cancel Service</h1>
+      
+      <div id="active-subscription" class="hidden">
+        <p>Your current plan: <strong id="current-plan"></strong></p>
+        <p>Next billing date: <span id="next-bill"></span></p>
+        
+        <textarea id="cancellation-reason" class="cancellation-reason" 
+          placeholder="Optional: Tell us why you're cancelling..."></textarea>
+        
+        <button id="confirm-cancel" class="btn">Confirm Cancellation</button>
+      </div>
+      
+      <div id="no-subscription" class="hidden">
+        <p>No active subscription found.</p>
+        <a href="/" class="btn">Return Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const customerId = localStorage.getItem('customerId') || 
+                        new URLSearchParams(window.location.search).get('customerId');
+      
+      if (customerId) {
+        try {
+          const response = await fetch('/.netlify/functions/get-subscription', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customerId })
+          });
+          
+          const sub = await response.json();
+          
+          if (sub.active) {
+            document.getElementById('current-plan').textContent = sub.plan;
+            document.getElementById('next-bill').textContent = sub.next_bill;
+            document.getElementById('active-subscription').classList.remove('hidden');
+          } else {
+            document.getElementById('no-subscription').classList.remove('hidden');
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          document.getElementById('no-subscription').classList.remove('hidden');
+        }
+      } else {
+        document.getElementById('no-subscription').classList.remove('hidden');
+      }
+
+      document.getElementById('confirm-cancel').addEventListener('click', async () => {
+        const reason = document.getElementById('cancellation-reason').value;
+        
+        try {
+          const response = await fetch('/.netlify/functions/cancel-subscription', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ customerId, reason })
+          });
+          
+          const result = await response.json();
+          alert('Your subscription has been cancelled. You will receive a confirmation email.');
+          window.location.href = '/';
+        } catch (error) {
+          alert('Cancellation failed. Please contact support.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

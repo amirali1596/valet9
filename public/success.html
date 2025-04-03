@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You | Valet Waste Solutions</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2300F0B5'/><circle cx='35' cy='40' r='10' fill='white'/><circle cx='65' cy='40' r='10' fill='white'/><path d='M30,65 Q50,80 70,65' stroke='white' stroke-width='5' fill='none'/></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00F0B5;
+      --secondary: #0A2540;
+      --accent: #9061F9;
+      --light: #FFFFFF;
+      --dark: #1E1E1E;
+      --error: #ff4444;
+      --success: #00C851;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 60px 0;
+      background-image: radial-gradient(circle at 10% 20%, rgba(144, 97, 249, 0.05) 0%, transparent 90%);
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .success-card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .success-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+    }
+    h1 {
+      color: var(--primary);
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .receipt {
+      background: rgba(144, 97, 249, 0.05);
+      border-radius: 8px;
+      padding: 30px;
+      margin: 30px 0;
+      text-align: left;
+      border: 1px solid rgba(144, 97, 249, 0.1);
+    }
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--primary);
+      color: var(--secondary);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 15px rgba(0, 240, 181, 0.3);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 240, 181, 0.4);
+    }
+    .btn-secondary {
+      background: var(--secondary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(10, 37, 64, 0.3);
+    }
+    .btn-secondary:hover {
+      box-shadow: 0 8px 25px rgba(10, 37, 64, 0.4);
+    }
+    .info-item {
+      margin-bottom: 10px;
+    }
+    .info-label {
+      font-weight: 600;
+      color: var(--secondary);
+      display: inline-block;
+      width: 150px;
+    }
+    .cancel-notice {
+      margin-top: 30px;
+      padding: 15px;
+      background: rgba(255, 68, 68, 0.05);
+      border-radius: 8px;
+      border-left: 4px solid var(--error);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="success-card">
+      <h1><i class="fas fa-check-circle"></i> Thank You!</h1>
+      <p>Your payment was processed successfully and your service is now active.</p>
+      
+      <div class="receipt">
+        <h3><i class="fas fa-receipt"></i> Order Details</h3>
+        
+        <div class="info-item">
+          <span class="info-label">Transaction ID:</span>
+          <span id="payment-id"></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Service Plan:</span>
+          <span id="service-plan"></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Amount:</span>
+          $<span id="payment-amount"></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email Sent To:</span>
+          <span id="customer-email"></span>
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <a href="/" class="btn"><i class="fas fa-home"></i> Return Home</a>
+        <a id="customer-portal-btn" class="btn btn-secondary" style="display:none;">
+          <i class="fas fa-cog"></i> Manage Subscription
+        </a>
+      </div>
+      
+      <div class="cancel-notice">
+        <p>Need to cancel? <a id="cancel-link" href="#">Click here to cancel your service</a>.</p>
+        <p style="font-size:0.9em; margin-top:5px;">We'd appreciate if you could <a href="#" id="feedback-link">tell us why</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Parse URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      // Display transaction details
+      document.getElementById('payment-id').textContent = urlParams.get('payment_id') || 'N/A';
+      document.getElementById('service-plan').textContent = urlParams.get('plan') === 'premium' ? 'Premium ($40/month)' : 'Standard ($25/month)';
+      document.getElementById('payment-amount').textContent = urlParams.get('amount') ? (urlParams.get('amount')/100).toFixed(2) : '25.00';
+      document.getElementById('customer-email').textContent = urlParams.get('email') || 'your email';
+      
+      // Set up cancellation link
+      const cancelLink = document.getElementById('cancel-link');
+      const feedbackLink = document.getElementById('feedback-link');
+      const customerPortalBtn = document.getElementById('customer-portal-btn');
+      
+      if (urlParams.get('customerId')) {
+        // Store customer ID for future use
+        localStorage.setItem('customerId', urlParams.get('customerId'));
+        
+        // Set up cancellation link
+        cancelLink.href = `/cancel.html?customerId=${urlParams.get('customerId')}&payment_id=${urlParams.get('payment_id')}`;
+        feedbackLink.href = `/feedback.html?reason=cancellation&customerId=${urlParams.get('customerId')}`;
+        
+        // Enable customer portal if configured
+        if (process.env.STRIPE_CUSTOMER_PORTAL === 'true') {
+          customerPortalBtn.style.display = 'inline-block';
+          customerPortalBtn.href = `/.netlify/functions/create-portal-session?customerId=${urlParams.get('customerId')}`;
+        }
+      } else {
+        document.querySelector('.cancel-notice').style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valet Waste Solutions | Premium Trash Pickup Service</title>
+  <!-- Updated colorful round favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%2300F0B5'/><circle cx='35' cy='40' r='10' fill='white'/><circle cx='65' cy='40' r='10' fill='white'/><path d='M30,65 Q50,80 70,65' stroke='white' stroke-width='5' fill='none'/></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== COLOR PALETTE ===== */
+    :root {
+      --primary: #00F0B5;
+      --secondary: #0A2540;
+      --accent: #9061F9;
+      --light: #FFFFFF;
+      --dark: #1E1E1E;
+      --gray: #F5F5F5;
+      --hero-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    /* ===== BASE STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+      position: relative;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    section {
+      padding: 100px 0;
+      position: relative;
+      overflow: visible;
+    }
+    h1, h2, h3 {
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    /* ===== ILLUMINATING SNAKE ACCENT LINES ===== */
+    .snake-path {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .snake {
+      position: absolute;
+      height: 4px;
+      background: var(--accent);
+      opacity: 0.7;
+      filter: blur(1px) drop-shadow(0 0 10px var(--accent));
+      animation: snakeMove 40s linear infinite;
+      border-radius: 4px;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, 
+        transparent, 
+        var(--accent), 
+        var(--primary), 
+        transparent);
+    }
+    .snake:nth-child(1) {
+      top: 20%;
+      width: 120%;
+      animation-delay: 0s;
+      animation-duration: 50s;
+      height: 3px;
+    }
+    .snake:nth-child(2) {
+      top: 35%;
+      width: 150%;
+      animation-delay: 5s;
+      animation-duration: 60s;
+      height: 4px;
+    }
+    .snake:nth-child(3) {
+      top: 50%;
+      width: 110%;
+      animation-delay: 10s;
+      animation-duration: 55s;
+      height: 2px;
+    }
+    .snake:nth-child(4) {
+      top: 65%;
+      width: 130%;
+      animation-delay: 15s;
+      animation-duration: 45s;
+      height: 3px;
+    }
+    .snake:nth-child(5) {
+      top: 80%;
+      width: 140%;
+      animation-delay: 20s;
+      animation-duration: 65s;
+      height: 2px;
+    }
+    @keyframes snakeMove {
+      0% { 
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      5% {
+        opacity: 0.8;
+      }
+      95% {
+        opacity: 0.8;
+      }
+      100% { 
+        transform: translateX(100vw);
+        opacity: 0;
+      }
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .scroll-animate {
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+    .fade-up {
+      transform: translateY(30px);
+    }
+    .fade-left {
+      transform: translateX(-30px);
+    }
+    .fade-right {
+      transform: translateX(30px);
+    }
+    .scale-in {
+      transform: scale(0.95);
+    }
+    .animate-in {
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+
+    /* ===== ENHANCED HOVER EFFECTS ===== */
+    i {
+      transition: all 0.3s ease;
+    }
+    i:hover {
+      transform: scale(1.1);
+      color: var(--primary);
+    }
+    
+    .gradient-box, .faq-gradient-box, .plan, .step {
+      transition: all 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gradient-box:hover, .faq-gradient-box:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+    
+    a:not(.btn) {
+      position: relative;
+      text-decoration: none;
+      color: var(--secondary);
+    }
+    a:not(.btn):after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--primary);
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+    a:not(.btn):hover:after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--primary);
+      color: var(--secondary);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 240, 181, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 240, 181, 0.4);
+    }
+    .btn:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    .btn:hover:before {
+      left: 100%;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      background: var(--hero-bg);
+      color: var(--secondary);
+      padding: 100px 0;
+      position: relative;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+    .hero-content {
+      max-width: 600px;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--secondary);
+      line-height: 1.2;
+      transition: all 0.3s ease;
+    }
+    .hero h1:hover {
+      transform: translateX(5px);
+    }
+    .hero h1 span {
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+    .hero h1 span:hover {
+      text-shadow: 0 0 10px rgba(0, 240, 181, 0.5);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      color: rgba(10, 37, 64, 0.8);
+      transition: all 0.3s ease;
+    }
+    .hero p:hover {
+      transform: translateX(3px);
+      opacity: 1;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 15px;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      position: relative;
+      height: 400px;
+      overflow: visible;
+    }
+    .gradient-box {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      padding: 40px 30px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      background: linear-gradient(45deg, #FF416C 0%, #FF4B2B 20%, #FF7B25 40%, #FFC837 60%, #87E0FD 80%);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
+      z-index: 1;
+    }
+    .gradient-box h3 {
+      color: white;
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      font-weight: 700;
+    }
+    .gradient-box p {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      font-size: 1.1rem;
+      opacity: 0.95;
+      padding: 10px 15px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+    .gradient-box p:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateX(5px);
+    }
+    .gradient-box i {
+      margin-right: 12px;
+      font-size: 1.3rem;
+      min-width: 25px;
+      text-align: center;
+      color: rgba(255,255,255,0.9);
+    }
+    .floating-card {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      background: rgba(0,0,0,0.8);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      width: 220px;
+      animation: float 6s ease-in-out infinite;
+      color: white;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: rotate(-5deg);
+    }
+    .floating-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+      color: white;
+    }
+    .floating-card-mascots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 15px;
+    }
+    .mini-blob {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .mini-blob:hover {
+      transform: scale(1.1) translateY(-5px);
+    }
+    .mini-blob.red {
+      background: #FF6B6B;
+    }
+    .mini-blob.blue {
+      background: #4776E6;
+    }
+    .mini-blob.purple {
+      background: #9061F9;
+    }
+    .mini-blob.yellow {
+      background: #FFC837;
+    }
+    .mini-blob::before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 5px;
+      background: white;
+      border-radius: 50%;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.9;
+      box-shadow: 
+        -10px -5px 0 0 white,
+        10px -5px 0 0 white;
+    }
+    .mini-blob::after {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 8px;
+      border-bottom: 2px solid white;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.9;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    .how-it-works {
+      text-align: center;
+      background: var(--gray);
+    }
+    .how-it-works h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: var(--secondary);
+    }
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .step {
+      flex: 1;
+      min-width: 280px;
+      max-width: 320px;
+      padding: 40px 30px;
+      border-radius: 16px;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      opacity: 0.9;
+    }
+    .step:nth-child(1)::before {
+      background: linear-gradient(45deg, #FF416C 0%, #FF4B2B 20%, #FF7B25 40%, #FFC837 60%, #87E0FD 80%);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
+    }
+    .step:nth-child(2)::before {
+      background: linear-gradient(45deg, #4776E6 0%, #8E54E9 20%, #38EF7D 40%, #00B4DB 60%, #A8FF78 80%);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
+    }
+    .step:nth-child(3)::before {
+      background: linear-gradient(45deg, #FC466B 0%, #FF0000 30%, #FF6B6B 60%, #0575E6 80%, #3F5EFB 90%);
+      background-size: 300% 300%;
+      animation: gradientShift 12s ease infinite;
+    }
+    .step:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    .step i {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: white;
+      background: rgba(255,255,255,0.2);
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      border-radius: 50%;
+      text-align: center;
+      display: inline-block;
+    }
+    .step h3 {
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      color: white;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .step p {
+      color: rgba(255,255,255,0.9);
+      font-weight: 300;
+    }
+
+    /* ===== PRICING ===== */
+    .pricing {
+      text-align: center;
+      background: white;
+    }
+    .pricing h2 {
+      font-size: 2.5rem;
+      margin-bottom: 80px;
+    }
+    .plans {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .plan {
+      background: white;
+      border-radius: 16px;
+      padding: 50px 40px;
+      width: 100%;
+      max-width: 400px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 30px rgba(10, 37, 64, 0.08);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .plan:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(10, 37, 64, 0.15);
+    }
+    .plan.popular {
+      border: 2px solid var(--primary);
+    }
+    .plan.popular:before {
+      content: 'Most Convenient';
+      position: absolute;
+      top: 20px;
+      right: -30px;
+      background: var(--primary);
+      color: var(--secondary);
+      padding: 5px 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transform: rotate(45deg);
+    }
+    .plan h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .plan .price {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 30px;
+    }
+    .plan .price span {
+      font-size: 1rem;
+      color: var(--dark);
+      opacity: 0.7;
+    }
+    .plan ul {
+      list-style: none;
+      margin-bottom: 40px;
+      text-align: left;
+    }
+    .plan ul li {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+      font-weight: 300;
+    }
+    .plan ul li:before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    .plan-note {
+      font-style: italic;
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-top: 10px;
+      border-top: 1px dashed #ddd;
+      padding-top: 10px;
+      text-align: center;
+    }
+
+    /* ===== FAQ SECTION ===== */
+    .faq {
+      background: var(--gray);
+    }
+    .faq h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+    }
+    .faq-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .faq-accordion {
+      flex: 1;
+    }
+    .faq-item {
+      margin-bottom: 15px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      background: white;
+    }
+    .faq-question {
+      padding: 20px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .faq-question:hover {
+      background: rgba(0, 240, 181, 0.05);
+    }
+    .faq-question h3 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--secondary);
+    }
+    .faq-question i {
+      transition: transform 0.3s ease;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 25px;
+    }
+    .faq-answer p {
+      padding: 0 0 20px;
+      color: var(--dark);
+      opacity: 0.9;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+    .faq-card {
+      position: relative;
+      height: 400px;
+      margin-left: 40px;
+      overflow: visible;
+    }
+    .faq-gradient-box {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      padding: 40px 30px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      background: linear-gradient(45deg, #4776E6 0%, #8E54E9 20%, #38EF7D 40%, #00B4DB 60%, #A8FF78 80%);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
+      z-index: 1;
+    }
+    .faq-gradient-box h3 {
+      color: white;
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      font-weight: 700;
+    }
+    .faq-gradient-box p {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+      font-size: 1.1rem;
+      opacity: 0.95;
+      padding: 10px 15px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+    .faq-gradient-box p:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateX(5px);
+    }
+    .faq-gradient-box i {
+      margin-right: 12px;
+      font-size: 1.3rem;
+      min-width: 25px;
+      text-align: center;
+      color: rgba(255,255,255,0.9);
+    }
+    .faq-card .floating-card {
+      top: -20px;
+      right: -20px;
+      left: auto;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--secondary);
+      color: white;
+      padding: 100px 0 30px;
+      position: relative;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .footer-section {
+      flex: 1;
+      min-width: 300px;
+    }
+    .contact-form {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: visible;
+    }
+    .form-header {
+      display: inline-block;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+    .form-group label {
+      position: absolute;
+      top: 12px;
+      left: 15px;
+      color: rgba(255,255,255,0.7);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 15px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255,255,255,0.1);
+    }
+    .form-group input:focus + label,
+    .form-group input:valid + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:valid + label {
+      top: -20px;
+      left: 0;
+      font-size: 0.8rem;
+      color: var(--primary);
+    }
+    .form-group textarea {
+      height: 120px;
+      resize: none;
+    }
+    .contact-info p {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+    .contact-info i {
+      margin-right: 15px;
+      color: var(--primary);
+      font-size: 1.2rem;
+      min-width: 20px;
+    }
+    .social-links {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      opacity: 0.7;
+    }
+    .social-links a:hover {
+      color: var(--primary);
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+    .copyright {
+      text-align: center;
+      margin-top: 80px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-weight: 300;
+      opacity: 0.7;
+    }
+
+    /* ===== BLOB STYLES ===== */
+    .blob {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      filter: blur(0px);
+      opacity: 0.5;
+      z-index: 0;
+      animation: float 8s ease-in-out infinite;
+    }
+    .blob.blue {
+      background: #4776E6;
+    }
+    .blob.green {
+      background: #38EF7D;
+    }
+    .blob.pink {
+      background: #FF7BE5;
+    }
+    .blob.yellow {
+      background: #FFC837;
+    }
+    .blob.purple {
+      background: #9061F9;
+    }
+    .blob::before {
+      content: "";
+      position: absolute;
+      width: 30px;
+      height: 15px;
+      background: white;
+      border-radius: 50%;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.8;
+      box-shadow: 
+        -20px -10px 0 0 white,
+        20px -10px 0 0 white;
+    }
+    .blob::after {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 20px;
+      border-bottom: 5px solid white;
+      border-radius: 50%;
+      top: 55%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.8;
+    }
+
+    /* Special Blob Types */
+    .blob-walker {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      animation: walk 20s linear infinite, bounce 1s ease infinite alternate;
+      z-index: 0;
+    }
+    .blob-hanger {
+      position: absolute;
+      width: 60px;
+      height: 80px;
+      border-radius: 50% 50% 0 0;
+      animation: swing 8s ease-in-out infinite;
+      transform-origin: top center;
+      z-index: 0;
+    }
+    .blob-roller {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      animation: roll 25s linear infinite;
+      z-index: 0;
+    }
+    .bin {
+      position: absolute;
+      width: 40px;
+      height: 50px;
+      background: #555;
+      border-radius: 5px;
+      bottom: -10px;
+      left: 30px;
+    }
+    .bin::after {
+      content: "";
+      position: absolute;
+      width: 50px;
+      height: 10px;
+      background: #333;
+      border-radius: 3px;
+      top: -5px;
+      left: -5px;
+    }
+    .blob-peeker {
+      position: absolute;
+      width: 50px;
+      height: 40px;
+      border-radius: 50% 50% 0 0;
+      animation: peek 8s ease infinite;
+      z-index: 0;
+    }
+
+    /* Blob faces for all types */
+    .blob-walker::before, 
+    .blob-hanger::before,
+    .blob-roller::before,
+    .blob-peeker::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.8;
+      box-shadow: 
+        -12px -6px 0 0 white,
+        12px -6px 0 0 white;
+    }
+    .blob-walker::after,
+    .blob-hanger::after,
+    .blob-roller::after,
+    .blob-peeker::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 12px;
+      border-bottom: 3px solid white;
+      border-radius: 50%;
+      top: 45%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.8;
+    }
+    /* Special face for hangers (upside down) */
+    .blob-hanger::before {
+      top: 60%;
+      box-shadow: 
+        -12px 6px 0 0 white,
+        12px 6px 0 0 white;
+    }
+    .blob-hanger::after {
+      top: 45%;
+      border-bottom: none;
+      border-top: 3px solid white;
+    }
+
+    /* Blob Animations */
+    @keyframes walk {
+      0% { transform: translateX(-100px); }
+      100% { transform: translateX(calc(100vw + 100px)); }
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
+    }
+    @keyframes swing {
+      0%, 100% { transform: rotate(-10deg); }
+      50% { transform: rotate(10deg); }
+    }
+    @keyframes roll {
+      0% { transform: translateX(-100px) rotate(0deg); }
+      100% { transform: translateX(calc(100vw + 100px)) rotate(360deg); }
+    }
+    @keyframes peek {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-btns {
+        justify-content: center;
+      }
+      .hero-card {
+        margin-top: 60px;
+        height: 300px;
+      }
+      .steps, .plans, .footer-container {
+        flex-direction: column;
+      }
+      .step, .plan {
+        width: 100%;
+        max-width: 350px;
+      }
+      .faq-content {
+        grid-template-columns: 1fr;
+      }
+      .faq-card {
+        margin-left: 0;
+        margin-top: 60px;
+        height: 300px;
+      }
+      
+      .snake {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Illuminating Snake Accent Lines -->
+  <div class="snake-path">
+    <div class="snake"></div>
+    <div class="snake"></div>
+    <div class="snake"></div>
+    <div class="snake"></div>
+    <div class="snake"></div>
+  </div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content scroll-animate fade-up">
+        <h1>Stress-Free Trash Service.<br><span>Done Right.</span></h1>
+        <p>We handle the dirty work so you don't have to. Reliable, convenient trash pickup that fits your schedule.</p>
+        <div class="hero-btns">
+          <a href="#pricing" class="btn">Get Started</a>
+          <a href="#how-it-works" class="btn" style="background: var(--accent); box-shadow: 0 4px 15px rgba(144, 97, 249, 0.3);">How It Works</a>
+        </div>
+      </div>
+
+      <div class="hero-card scroll-animate fade-right">
+        <div class="gradient-box">
+          <h3>Why Customers Love Us</h3>
+          <p><i class="fas fa-check-circle"></i> Never miss trash day again</p>
+          <p><i class="fas fa-check-circle"></i> Perfect for busy professionals</p>
+          <p><i class="fas fa-check-circle"></i> Eco-friendly disposal methods</p>
+          <p><i class="fas fa-check-circle"></i> Responsive customer service</p>
+        </div>
+        <div class="floating-card">
+          <h3>Meet Our Team!</h3>
+          <div class="floating-card-mascots">
+            <div class="mini-blob red"></div>
+            <div class="mini-blob blue"></div>
+            <div class="mini-blob purple"></div>
+            <div class="mini-blob yellow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="blob blob-1 blue"></div>
+    <div class="blob blob-2 pink"></div>
+    <div class="blob-walker blue" style="bottom: 100px; animation-delay: 0s;"></div>
+    <div class="blob-walker pink" style="bottom: 200px; animation-delay: 5s;"></div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2 class="scroll-animate fade-up">How It Works</h2>
+      <div class="steps">
+        <div class="step scroll-animate fade-up" style="transition-delay: 0.1s">
+          <i class="fas fa-calendar-check"></i>
+          <h3>You Schedule</h3>
+          <p>Choose your 2 pickup days per week with our easy online system.</p>
+        </div>
+        <div class="step scroll-animate fade-up" style="transition-delay: 0.2s">
+          <i class="fas fa-door-open"></i>
+          <h3>You Place Trash Outside</h3>
+          <p>Leave your sealed trash bag at your doorstep by 8AM on pickup days.</p>
+        </div>
+        <div class="step scroll-animate fade-up" style="transition-delay: 0.3s">
+          <i class="fas fa-truck-pickup"></i>
+          <h3>We Move It to the Curb</h3>
+          <p>Our team moves your trash to the curb for city pickup - no hassle for you!</p>
+        </div>
+      </div>
+    </div>
+    <div class="blob blob-faq-1 green"></div>
+    <div class="blob blob-faq-2 purple"></div>
+    <div class="blob-roller purple" style="bottom: 80px; animation-delay: 2s;">
+      <div class="bin"></div>
+    </div>
+    <div class="blob-peeker yellow" style="bottom: 50px; left: 5%;"></div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2 class="scroll-animate fade-up">Service Options</h2>
+      <div class="plans">
+        <div class="plan scroll-animate fade-left">
+          <h3>Standard 
+            <span class="plan-tooltip" data-tooltip="Ideal for apartments/communities with shared dumpsters">
+              <i class="fas fa-info-circle"></i>
+            </span>
+          </h3>
+          <div class="price">$25<span>/month</span></div>
+          <ul>
+            <li>2x/week pickup</li>
+            <li>We move trash to shared dumpster/curb</li>
+            <li><strong>You return empty bin</strong> (if applicable)</li>
+            <li class="plan-note">Best for apartments</li>
+          </ul>
+          <a href="signup.html" class="btn">Get Started</a>
+        </div>
+        <div class="plan popular scroll-animate fade-right">
+          <h3>Premium 
+            <span class="plan-tooltip" data-tooltip="Perfect for houses needing full bin service">
+              <i class="fas fa-info-circle"></i>
+            </span>
+          </h3>
+          <div class="price">$40<span>/month</span></div>
+          <ul>
+            <li>2x/week pickup</li>
+            <li>We move trash to curb & return empty bin</li>
+            <li><strong>Full bin service</strong> - we handle everything</li>
+            <li class="plan-note">Best for houses</li>
+          </ul>
+          <a href="signup.html" class="btn">Get Started</a>
+        </div>
+      </div>
+    </div>
+    <div class="blob-hanger green" style="top: 50px; right: 10%;"></div>
+  </section>
+
+  <!-- ===== FAQ SECTION ===== -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="scroll-animate fade-up">Frequently Asked Questions</h2>
+      <div class="faq-content">
+        <div class="faq-accordion">
+          <div class="faq-item scroll-animate fade-left" style="transition-delay: 0.05s">
+            <div class="faq-question">
+              <h3>What days are available for trash pickup?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>We offer pickup services Monday through Friday. You can choose any 2 days that work best for your schedule during signup.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item scroll-animate fade-left" style="transition-delay: 0.1s">
+            <div class="faq-question">
+              <h3>What happens if I forget to put my trash out?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>If you miss your scheduled pickup, you can contact us for a same-day pickup (additional fee applies) or wait until your next scheduled service day.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item scroll-animate fade-left" style="transition-delay: 0.15s">
+            <div class="faq-question">
+              <h3>What items can you move to the curb?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>We can move standard household trash bags and bins to the curb. For large items or hazardous materials, please contact your local waste management service.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item scroll-animate fade-left" style="transition-delay: 0.2s">
+            <div class="faq-question">
+              <h3>How do I change or cancel my service?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>You can modify your service anytime through your online account or by contacting us directly. We require 7 days notice for cancellations.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item scroll-animate fade-left" style="transition-delay: 0.25s">
+            <div class="faq-question">
+              <h3>What items are prohibited?</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <p>We cannot move hazardous materials, electronics, or large items like furniture. Please contact your local waste management for special disposal needs.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-card scroll-animate fade-right">
+          <div class="faq-gradient-box">
+            <h3>Quick Support</h3>
+            <p><i class="fas fa-clock"></i> Responsive customer service</p>
+            <p><i class="fas fa-phone"></i> (631) 974-1343</p>
+            <p><i class="fas fa-envelope"></i> help@valetwastesolutionsllc.com</p>
+            <p><i class="fas fa-comments"></i> Text support available</p>
+          </div>
+          <div class="floating-card">
+            <h3>Still Have Questions?</h3>
+            <div class="floating-card-mascots">
+              <div class="mini-blob red"></div>
+              <div class="mini-blob blue"></div>
+              <div class="mini-blob purple"></div>
+              <div class="mini-blob yellow"></div>
+            </div>
+            <a href="#contact" class="btn" style="margin-top: 15px; background: var(--accent);">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="contact">
+    <div class="footer-container">
+      <div class="footer-section">
+        <div class="contact-form">
+          <div class="form-header">
+            <h3 class="scroll-animate fade-up">Send Us a Message</h3>
+          </div>
+          <form name="contact" method="POST" data-netlify="true">
+            <input type="hidden" name="form-type" value="general">
+            <div class="form-group scroll-animate fade-up" style="transition-delay: 0.1s">
+              <input type="text" id="name" name="name" required>
+              <label for="name">Name</label>
+            </div>
+            <div class="form-group scroll-animate fade-up" style="transition-delay: 0.2s">
+              <input type="email" id="email" name="email" required>
+              <label for="email">Email</label>
+            </div>
+            <div class="form-group scroll-animate fade-up" style="transition-delay: 0.3s">
+              <textarea id="message" name="message" required></textarea>
+              <label for="message">Message</label>
+            </div>
+            <button type="submit" class="btn scroll-animate fade-up" style="transition-delay: 0.4s">Send Message</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <div class="contact-info">
+          <h3 class="scroll-animate fade-up">Contact Us</h3>
+          <p class="scroll-animate fade-up" style="transition-delay: 0.1s"><i class="fas fa-phone"></i> (631) 974-1343</p>
+          <p class="scroll-animate fade-up" style="transition-delay: 0.2s"><i class="fas fa-envelope"></i> help@valetwastesolutionsllc.com</p>
+          <p class="scroll-animate fade-up" style="transition-delay: 0.3s"><i class="fas fa-map-marker-alt"></i> Serving Rochester, NY and surrounding areas</p>
+          
+          <div class="social-links">
+            <a href="#" class="scroll-animate fade-up" style="transition-delay: 0.4s"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="scroll-animate fade-up" style="transition-delay: 0.5s"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="scroll-animate fade-up" style="transition-delay: 0.6s"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="copyright scroll-animate fade-up">
+      <p>&copy; 2024 Valet Waste Solutions. All rights reserved.</p>
+    </div>
+    <div class="blob-hanger blue" style="top: -30px; left: 20%;"></div>
+    <div class="blob-walker pink" style="bottom: 50px; animation-delay: 3s;"></div>
+  </footer>
+
+  <script>
+    // Email handling
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', function(e) {
+        const formType = this.querySelector('[name="form-type"]')?.value;
+        if (formType === 'signup') {
+          this.action = "mailto:amir@valetwastesolutionsllc.com";
+        } else {
+          this.action = "mailto:help@valetwastesolutionsllc.com";
+        }
+      });
+    });
+
+    // Scroll animations
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.scroll-animate');
+      elements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementTop < windowHeight * 0.8) {
+          el.classList.add('animate-in');
+        }
+      });
+    };
+
+    // Initialize animations
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add scroll event listener
+      window.addEventListener('scroll', animateOnScroll);
+      // Initial check in case elements are already visible
+      animateOnScroll();
+    });
+
+    // FAQ Accordion Functionality
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+
+    // Floating card interaction
+    const floatingCards = document.querySelectorAll('.floating-card');
+    function animateCards() {
+      floatingCards.forEach(card => {
+        card.style.transform = `rotate(${Math.sin(Date.now()/1000)*2}deg)`;
+      });
+      requestAnimationFrame(animateCards);
+    }
+    animateCards();
+  </script>
+</body>
+</html>
